@@ -15,7 +15,16 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->text('full_name')->nullable();
+            $table->text('email')->nullable();
+            $table->text('phone')->nullable();
+            $table->longText('address')->nullable();
+            $table->longText('note')->nullable();
+            $table->unsignedBigInteger('total_price')->nullable();
+
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
+            $table->softDeletes();
         });
     }
 
