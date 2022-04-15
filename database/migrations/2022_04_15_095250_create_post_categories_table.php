@@ -15,7 +15,12 @@ class CreatePostCategoriesTable extends Migration
     {
         Schema::create('post_categories', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('title')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
+
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
+            $table->softDeletes();
         });
     }
 
